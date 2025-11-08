@@ -22,4 +22,4 @@ jobs:
           aws-region: us-east-1
 
       - name: Sync website to S3
-        run: aws s3 sync ./ s3://tarlamorris-dev-site --delete
+        run: aws s3 sync ./ s3://tarlamorris-dev-site --exclude ".git/*" --delete
