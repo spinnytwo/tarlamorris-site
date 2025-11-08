@@ -1,0 +1,231 @@
+/* Global theme */
+:root{
+  --bg:#E1E1DB; /* requested background */
+  --ink:#1C1A20;
+  --muted:#505050;
+  --line:#cfcfc8;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font:16px/1.65 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial;
+}
+
+/* Layout primitives */
+.container{max-width:1100px;margin:0 auto;padding:0 24px}
+.section{padding:72px 0}
+.section-title{font-size:clamp(2rem,3.5vw,3rem);margin:0 0 24px}
+h1,h2,h3{font-weight:700;letter-spacing:.01em}
+h3{margin:0 0 10px}
+p{margin:0 0 14px}
+
+/* Top nav */
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);z-index:10}
+.nav{display:flex;justify-content:space-between;align-items:center;height:56px}
+.brand{font-weight:800;text-decoration:none;color:var(--ink)}
+.nav__menu{display:flex;gap:18px;list-style:none;margin:0;padding:0}
+.nav__menu a{color:var(--ink);text-decoration:none;font-weight:700}
+.nav__toggle{display:none}
+@media (max-width:900px){
+  .nav__toggle{display:block}
+  .nav__menu{display:none;position:absolute;top:56px;left:0;right:0;background:var(--bg);padding:16px 24px;border-bottom:1px solid var(--line)}
+  .nav__menu.open{display:block}
+}
+
+/* Hero */
+.hero{display:grid;place-items:center;padding:80px 0 56px;text-align:center}
+.avatar{width:220px;height:220px;object-fit:cover;border-radius:50%;border:8px solid #fff;box-shadow:0 10px 30px rgba(0,0,0,.08)}
+.title-wrap{display:grid;place-items:center}
+.title{font-size:clamp(3rem,10vw,7rem);line-height:.9;margin:18px 0 6px;letter-spacing:.05em}
+.tagline{font-style:italic;max-width:68ch}
+
+/* About grid */
+.about-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:32px;align-items:center}
+.about-art{height:260px;background:linear-gradient(135deg,#c7c7bf,transparent);border-radius:14px;border:1px solid var(--line)}
+@media (max-width:900px){.about-grid{grid-template-columns:1fr}.about-art{display:none}}
+
+/* Timeline */
+.timeline{position:relative;padding-left:28px;border-left:3px solid var(--ink);margin-top:18px}
+.timeline:after{content:'▼';position:absolute;left:-10px;bottom:-8px;color:var(--ink)}
+.node{position:relative;margin:42px 0}
+.node:before{content:'';position:absolute;left:-33px;top:6px;width:14px;height:14px;background:var(--ink);border-radius:50%}
+.content .meta{color:var(--muted);margin:.25rem 0 1rem}
+
+/* Columns */
+.three-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.three-cols ul{padding-left:18px}
+@media (max-width:900px){.three-cols{grid-template-columns:1fr}}
+
+/* Logos */
+.logo-grid{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px;padding:0;margin:24px 0 0}
+.logo-grid li{display:flex;flex-direction:column;align-items:center;gap:10px}
+.logo-grid img{display:block;width:120px;height:80px;object-fit:contain;border:1px solid var(--line);border-radius:12px;background:#fff}
+
+/* Projects */
+.project{border-top:1px solid var(--line);padding-top:18px;margin-top:18px}
+.project h3{font-size:1.4rem}
+
+/* Certificates */
+.certs{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;list-style:none;padding:0;margin:0}
+.certs li{border:1px solid var(--line);padding:12px;border-radius:12px;background:#fff}
+
+/* Contact */
+.contact{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:16px}
+
+/* Footer */
+.footer{border-top:1px solid var(--line);padding:28px 0;margin-top:30px}
+
+
+/* ===== NAV UPDATE ===== */
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);z-index:20}
+.nav{display:flex;justify-content:flex-end;align-items:center;height:56px;gap:14px}
+.spacer{flex:1} /* keeps right alignment while preserving container spacing */
+.nav__menu{display:flex;gap:18px;list-style:none;margin:0;padding:0;align-items:center}
+.nav__menu a{color:var(--ink);text-decoration:none;font-weight:700}
+.nav__toggle{display:none;background:none;border:0;font-size:1.6rem;line-height:1;cursor:pointer}
+
+/* Off-canvas drawer for <= 768px */
+@media (max-width: 900px){
+  .nav{justify-content:flex-end}
+  .nav__menu{display:none}
+  .nav__toggle{display:block;margin-left:auto}
+  .drawer{position:fixed;top:0;right:0;height:100vh;width:210px;background:var(--bg);border-left:1px solid var(--line);transform:translateX(100%);transition:transform .25s ease;z-index:40;padding:18px}
+  .drawer.open{transform:translateX(0)}
+  .drawer__close{background:none;border:0;font-size:1.8rem;line-height:1;cursor:pointer;position:absolute;top:10px;right:14px}
+  .drawer__list{list-style:none;padding:56px 0 0;margin:0;display:flex;flex-direction:column;gap:14px}
+  .drawer__list a{color:var(--ink);text-decoration:none;font-weight:700;font-size:1.05rem}
+  .backdrop{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:30}
+  body.menu-open .backdrop{display:block}
+  .backdrop[hidden]{display:none}
+}
+
+@media (min-width: 901px){.drawer{display:none} .drawer.open{transform:translateX(100%)}}
+
+
+/* --- Alignment fixes for >= 901px --- */
+.spacer{display:none}
+.nav__menu{margin-left:auto;justify-content:flex-end}
+
+@media (min-width: 901px){
+  .nav{justify-content:flex-end}
+}
+
+/* Force full-width nav container for proper right alignment */
+.topbar .nav{
+  width:100%;
+  max-width:none;
+  padding-left:24px;
+  padding-right:24px;
+}
+
+/* Hard force alignment on wide layout */
+@media (min-width: 901px){
+  .nav{
+    display:flex;
+    justify-content:flex-end !important;
+    width:100%;
+  }
+  .nav__menu{
+    margin-left:auto !important;
+    justify-content:flex-end !important;
+  }
+  .spacer{display:none !important;}
+}
+
+/* ===== HERO STACKED TITLE ===== */
+.hero{padding:84px 0 40px;text-align:center}
+.hero-wrap{
+  display:inline-grid;
+  grid-auto-flow:column;
+  align-items:center;
+  gap:24px;
+  position:relative;
+}
+.avatar--hero{
+  width:400px;height:400px;object-fit:contain;border-radius:50%;
+  border:0;box-shadow:none; /* circular PNG already cut out */
+  z-index:2;
+}
+.hero-title{
+  font-family:"Hanken Grotesk","HK Grotesk",system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial;
+  font-weight:800;
+  font-size:90.7px;
+  line-height:0.88;
+  letter-spacing:0.02em;
+  margin:0;
+  text-align:left;
+  z-index:1;
+  transform:translateX(-18px); /* slightly behind the portrait */
+}
+.hero-title span{display:block}
+/* Center the combined block */
+.hero .tagline{max-width:72ch;margin:18px auto 0}
+/* Gotham is proprietary; use a close fallback stack */
+.tagline--gotham{
+  font-family: "Avenir Next","Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size:13.3px;
+  font-style:italic;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1100px){
+  .avatar--hero{width:340px;height:340px}
+  .hero-title{font-size:72px;transform:translateX(-12px)}
+}
+@media (max-width: 900px){
+  .hero-wrap{grid-auto-flow:row;gap:8px}
+  .avatar--hero{width:300px;height:300px}
+  .hero-title{font-size:58px;transform:none;text-align:center}
+}
+@media (max-width: 520px){
+  .avatar--hero{width:240px;height:240px}
+  .hero-title{font-size:44px}
+  .tagline--gotham{font-size:12.5px}
+}
+
+/* === Hero refinements (light face, tighter group, larger tagline) === */
+.hero-wrap{gap:6px}
+.hero-title{
+  font-weight:300; /* Light */
+  letter-spacing:0.01em;
+  transform:translateX(-32px); /* move closer behind the portrait */
+}
+.tagline--gotham{
+  font-size:16px; font-style: italic;
+}
+@media (max-width:1100px){
+  .hero-title{transform:translateX(-20px)}
+}
+@media (max-width:900px){
+  .hero-wrap{gap:4px}
+  .hero-title{transform:none}
+}
+
+/* === Hero: zero-gap between image and stacked text === */
+.hero-wrap{gap:0}
+.hero-title{transform:translateX(-46px)} /* pull text further under image edge */
+@media (max-width:1100px){ .hero-title{transform:translateX(-30px)} }
+@media (max-width:900px){ .hero-title{transform:none} .hero-wrap{gap:4px} }
+
+/* === Hero: ultra-light title + tighter overlap === */
+.hero-title{
+  font-weight:200; /* much lighter */
+  transform:translateX(-60px); /* pull further under the image */
+}
+@media (max-width:1100px){
+  .hero-title{transform:translateX(-40px)}
+}
+
+/* === Hero: switch to Raleway thin + tighter overlap === */
+.hero-title{
+  font-family: 'Raleway', sans-serif;
+  font-weight:100;
+  transform:translateX(-80px);
+}
+@media (max-width:1100px){
+  .hero-title{transform:translateX(-55px)}
+}

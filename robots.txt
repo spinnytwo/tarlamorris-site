@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://tarlamorris.com/sitemap.xml
