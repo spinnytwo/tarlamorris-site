@@ -1,0 +1,25 @@
+name: Deploy to Dev
+
+on:
+  push:
+    branches:
+      - dev
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: arn:aws:iam::565934499052:role/tarlamorrissite-dev-GitHubDeploy
+          aws-region: us-east-1
+
+      - name: Sync website to S3
+        run: aws s3 sync ./tarlamorris-site/ s3://tarlamorris-dev-site --delete
